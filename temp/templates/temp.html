@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>{{ msg }}</p>
+<p>{{ number }}</p>
+{#li[0]#}
+<p>列表操作: {{ li.0 }}</p>
+<p>字典操作: {{ dic.name }}</p>
+<p>对象操作: {{ test.name }}</p>
+
+
+<h2>标签语法</h2>
+{#   如果用户登录了 显示 #}
+{% if  test %}
+    {#    显示登录的信息  用户名  登录按钮#}
+    <span>{{ test.name }}</span> <a href="#">登出</a>
+{% else %}
+    <a href="#">登录</a> <a href="#">注册</a>
+{% endif %}
+
+
+{% if msg %}
+    <p>{{ msg }}</p>
+{% endif %}
+
+<form action="#">
+    <input type="text">
+</form>
+
+
+<h1>for循环的使用</h1>
+
+{% for d in dic %}
+
+{% endfor %}
+<ul>
+    {% for key,value in dic.items %}
+        <li>{{ value }}</li>
+    {% empty %}
+        <p>暂时无数据</p>
+    {% endfor %}
+</ul>
+<h2>for-forloop对象</h2>
+{% for i in li %}
+    {#    <p>{{ forloop.counter0 }}</p>#}
+    {#    <p>{{ forloop.first }}</p>#}
+    {#    <p>{{ forloop.last }}</p>#}
+{% endfor %}
+
+{# 配合if使用#}
+{% for n in nav %}
+    <span>{{ n }}</span>
+    {% if not forloop.last %}
+        |
+    {% endif %}
+{% endfor %}
+
+
+
+<h1></h1>
+
+<form action="/temp/login/">
+    <input type="text" name="username">
+    <input type="submit" value="登录">
+</form>
+
+<a href="{% url 'login' %}"></a>
+<p><input type="text" name="username"></p>
+<input type="submit" value="登录">
+<p>{% url 'list' number number %}</p>
+<p>{% url 'kw' id=test.age %}</p>
+
+</body>
+</html>
